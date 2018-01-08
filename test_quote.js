@@ -1,5 +1,5 @@
 var webdriver = require('selenium-webdriver');
-var assert = require('chai').assert
+var assert = require('chai').assert;
 
 // set up webdriver for chrome
 var driver = new webdriver.Builder().
