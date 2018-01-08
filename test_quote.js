@@ -39,9 +39,9 @@ driver.wait(webdriver.until.elementIsNotVisible(driver.findElement(webdriver.By.
 
 //assert quote is in expected range 
 driver.findElement(webdriver.By.className('pricing-hero-unit_price-heading')).getText().then(function(text) {
-    console.log('Quote: ' + text)
     var intQuote = text.replace(/[^0-9]/g,'');
-    assert.isTrue(1075 < intQuote < 1300);
+    console.log('Quote: ' + intQuote)
+    assert.isTrue(1075 < intQuote && intQuote < 1300);
     console.log('Quote within expected range.')
 });
 
