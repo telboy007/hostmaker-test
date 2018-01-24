@@ -23,25 +23,3 @@ QuotePage.prototype.submit = function() {
 };
 
 module.exports = QuotePage;
-
-
-// //create getters
-// var Page = require('.page/')
-
-// var LoginPage = Object.create(Page, {
-// 	postcode:	    { get: function () { return browser.element('#address'); } },
-// 	google_popup:	{ get: function () { return browser.element('#pac-item-query'); } },
-// 	bedrooms:	    { get: function () { return browser.element('#calculator-bedrooms'); } },
-// 	email:		    { get: function () { return browser.element('#email'); } },
-// 	quote_button:	{ get: function () { return browser.element('.calculate-income'); } },
-
-//     	open: { value: function() {
-// 	        Page.open.call(this, 'quote');
-// 	} },
-
-// 	submit: { value: function() {
-// 	        this.form.submitForm();
-// 	} }
-// });
-
-// module.exports = QuotePage;
