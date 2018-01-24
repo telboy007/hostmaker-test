@@ -24,20 +24,20 @@ test.describe('Valid Postcode', function() {
         quotePage.visit();
 
         // enter post code
-        driver.findElement(quotePage.postcode).sendKeys('N1 9PD');
+        quotePage.setValue(quotePage.postcode, 'N1 9PD');
 
         //wait for address list and click
         driver.wait(webdriver.until.elementLocated(quotePage.address_lookup), mochaTimeOut)
-        driver.findElement(quotePage.address_lookup).click();
+        quotePage.click(quotePage.address_lookup);
 
         //select number of bedrooms
-        driver.findElement(quotePage.two_bedrooms).click();
+        quotePage.click(quotePage.two_bedrooms);
 
         // enter email
-        driver.findElement(quotePage.email).sendKeys('test@test.com');
+        quotePage.setValue(quotePage.email, 'test@test.com');
 
         //calculate quote
-        quotePage.submit();
+        quotePage.click(quotePage.get_quote);
 
         //wait for loading to complete
         driver.wait(webdriver.until.stalenessOf(driver.findElement(quotePage.quote_loader), mochaTimeOut))

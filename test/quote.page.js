@@ -17,8 +17,13 @@ QuotePage.prototype.visit = function() {
     return webdriver.promise.fulfilled(true);
 };
  
-QuotePage.prototype.submit = function() {
-    this.driver.findElement(this.get_quote).click();
+QuotePage.prototype.click = function(element) {
+    this.driver.findElement(element).click();
+    return webdriver.promise.fulfilled(true);
+};
+
+QuotePage.prototype.setValue = function(element, text) {
+    this.driver.findElement(element).sendKeys(text);
     return webdriver.promise.fulfilled(true);
 };
 
