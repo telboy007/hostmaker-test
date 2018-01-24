@@ -1,8 +1,9 @@
 # hostmaker-test
 
-Utilises selenium-webdriver to run scripts against one or more browsers, this example is specifically against chrome.
+Utilises selenium-webdriver, chai and mocha.
 
-Improvements:
-* Handle timeouts of waits nicely
-* Mocha should be incorporated to provide test reporting,
-* Implement headless testing to speed up test run time (PhantomJS).
+This example is specifically against chrome.
+
+Run script by using the following commands:
+> npm install
+> ./node_modules/mocha/bin/mocha
