@@ -47,7 +47,7 @@ test.describe('Valid Postcode', function() {
         //assert quote is in expected range 
         driver.findElement(quotePage.quote_text).getText().then(function(text) {
             var intQuote = text.replace(/[^0-9]/g,'');
-            assert.isTrue(1200 < intQuote && intQuote < 1300);
+            assert.isTrue(1150 < intQuote && intQuote < 1350);
         });
     });
 });
