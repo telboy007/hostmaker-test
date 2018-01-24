@@ -9,18 +9,16 @@ var driver;
 const mochaTimeOut = 10000;
 
 
-//setup
-test.before(function() {
-    this.timeout(mochaTimeOut);
-    driver = new webdriver.Builder().withCapabilities(webdriver.Capabilities.chrome()).build();
-});
-
-
 //tests
 test.describe('Valid Postcode', function() {
-    test.it('complete form and check quote', function() {
-        this.timeout(mochaTimeOut);
+    this.timeout(mochaTimeOut);
 
+    //setup
+    test.before(function() {
+        driver = new webdriver.Builder().withCapabilities(webdriver.Capabilities.chrome()).build();
+    });
+
+    test.it('complete form and check quote', function() {
         //load homepage
         var quotePage = new QuotePage(driver);
         quotePage.visit();
@@ -50,17 +48,15 @@ test.describe('Valid Postcode', function() {
             assert.isTrue(1150 < intQuote && intQuote < 1350);
         });
     });
-});
+    
+    //post test clean up
+    test.afterEach(function() {
+        driver.manage().deleteAllCookies();
+    });
 
-
-//post test clean up
-test.afterEach(function() {
-    driver.manage().deleteAllCookies();
-});
-
-
-//clean up
-test.after(function() {
-    driver.manage().deleteAllCookies();
-    driver.quit();
+    //clean up
+    test.after(function() {
+        driver.manage().deleteAllCookies();
+        driver.quit();
+    });
 });
