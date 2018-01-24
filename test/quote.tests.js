@@ -42,6 +42,11 @@ test.describe('Valid Postcode', function() {
         //wait for loading to complete
         driver.wait(webdriver.until.stalenessOf(driver.findElement(quotePage.quote_loader), mochaTimeOut))
 
+        //assert quote is not null 
+        driver.findElement(quotePage.quote_text).getText().then(function(text) {
+            assert.isNotEmpty(text);
+        });
+
         //assert quote is in expected range 
         driver.findElement(quotePage.quote_text).getText().then(function(text) {
             var intQuote = text.replace(/[^0-9]/g,'');
@@ -56,7 +61,6 @@ test.describe('Valid Postcode', function() {
 
     //clean up
     test.after(function() {
-        driver.manage().deleteAllCookies();
         driver.quit();
     });
 });
