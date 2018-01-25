@@ -1,12 +1,14 @@
 var assert = require('chai').assert;
     webdriver = require('selenium-webdriver');
     test = require('selenium-webdriver/testing');
-    QuotePage = require('./quote.page');
+    QuotePage = require('../page objects/quote.page');
+    config = require('config');
 
 
 //params and variables
 var driver;
-const mochaTimeOut = 10000;
+const mochaTimeOut = config.get('mochaTimeOut');
+const explicitWait = config.get('explicitWait');
 
 
 //tests
@@ -24,33 +26,32 @@ test.describe('Valid Postcode', function() {
         quotePage.visit();
 
         // enter post code
-        quotePage.setValue(quotePage.postcode, 'N1 9PD');
+        quotePage.setText(quotePage.postcode, 'N1 9PD');
 
         //wait for address list and click
-        driver.wait(webdriver.until.elementLocated(quotePage.address_lookup), mochaTimeOut)
+        quotePage.untilLocated(quotePage.address_lookup, explicitWait);
         quotePage.click(quotePage.address_lookup);
 
         //select number of bedrooms
         quotePage.click(quotePage.two_bedrooms);
 
         // enter email
-        quotePage.setValue(quotePage.email, 'test@test.com');
+        quotePage.setText(quotePage.email, 'test@test.com');
 
         //calculate quote
         quotePage.click(quotePage.get_quote);
 
-        //wait for loading to complete
-        driver.wait(webdriver.until.stalenessOf(driver.findElement(quotePage.quote_loader), mochaTimeOut))
+        //wait for loading to complete and quote to appear
+        quotePage.untilStale(quotePage.quote_loader, explicitWait);
+        quotePage.untilLocated(quotePage.quote_text, explicitWait);
 
-        //assert quote is not null 
-        driver.findElement(quotePage.quote_text).getText().then(function(text) {
-            assert.isNotEmpty(text);
-        });
+        quotePage.getText(quotePage.quote_text).then(function(text) {
+            //assert quote is not null 
+            assert.isNotEmpty(text, 'Quote is empty.');
 
-        //assert quote is in expected range 
-        driver.findElement(quotePage.quote_text).getText().then(function(text) {
+            //assert quote is in expected range 
             var intQuote = text.replace(/[^0-9]/g,'');
-            assert.isTrue(1150 < intQuote && intQuote < 1350);
+            assert.isTrue(1150 < intQuote && intQuote < 1350, 'Quote is not within expected range.');
         });
     });
     

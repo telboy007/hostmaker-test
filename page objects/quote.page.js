@@ -1,8 +1,11 @@
 var webdriver = require('selenium-webdriver');
+    config = require('config');
  
+
+// bits and bobs
 QuotePage = function QuotePage(driver) {
     this.driver = driver;
-    this.url = 'http://www.hostmaker.com';
+    this.url = config.get('url');
     this.postcode = webdriver.By.name('address')
     this.address_lookup = webdriver.By.className('pac-item-query')
     this.two_bedrooms = webdriver.By.css('#calculator-bedrooms > option:nth-child(2)')
@@ -22,8 +25,26 @@ QuotePage.prototype.click = function(element) {
     return webdriver.promise.fulfilled(true);
 };
 
-QuotePage.prototype.setValue = function(element, text) {
+QuotePage.prototype.getText = function(element) {
+    return this.driver.findElement(element).getText().then(function(text) {
+        return webdriver.promise.fulfilled(text, true);
+    });
+};
+
+QuotePage.prototype.setText = function(element, text) {
     this.driver.findElement(element).sendKeys(text);
+    return webdriver.promise.fulfilled(true);
+};
+
+// waits until an element is located
+QuotePage.prototype.untilLocated = function(element, time) {
+    this.driver.wait(webdriver.until.elementLocated(element, time));
+    return webdriver.promise.fulfilled(true);
+};
+
+// waits until an element has become stale
+QuotePage.prototype.untilStale = function(element, time) {
+    this.driver.wait(webdriver.until.stalenessOf(this.driver.findElement(element, time)));
     return webdriver.promise.fulfilled(true);
 };
 
