@@ -52,7 +52,7 @@ test.describe('Valid Postcode', function() {
 
             //assert quote is in expected range 
             var intQuote = text.replace(/[^0-9]/g,'');
-            assert.isTrue(1150 < intQuote && intQuote < 1250, 'Quote is not within expected range.');
+            assert.isTrue(1150 < intQuote && intQuote < 1350, 'Quote is not within expected range.');
         });
     });
     
