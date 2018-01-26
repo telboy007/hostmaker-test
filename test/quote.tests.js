@@ -1,3 +1,4 @@
+require('chromedriver');
 var assert = require('chai').assert;
     webdriver = require('selenium-webdriver');
     test = require('selenium-webdriver/testing');
@@ -17,7 +18,7 @@ test.describe('Valid Postcode', function() {
 
     //setup
     test.before(function() {
-        driver = new webdriver.Builder().withCapabilities(webdriver.Capabilities.chrome()).build();
+        driver = new webdriver.Builder().forBrowser('chrome').build();
     });
 
     test.it('complete form and check quote', function() {
@@ -38,7 +39,7 @@ test.describe('Valid Postcode', function() {
         // enter email
         quotePage.setText(quotePage.email, 'test@test.com');
 
-        //calculate quote
+        //click calculate button
         quotePage.click(quotePage.get_quote);
 
         //wait for loading to complete and quote to appear
