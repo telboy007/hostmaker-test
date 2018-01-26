@@ -44,7 +44,7 @@ test.describe('Valid Postcode', function() {
 
         //wait for loading to complete and quote to appear
         quotePage.untilStale(quotePage.quote_loader, explicitWait);
-        quotePage.untilLocated(quotePage.quote_text, explicitWait);
+        quotePage.untilVisible(quotePage.quote_text, explicitWait);
 
         quotePage.getText(quotePage.quote_text).then(function(text) {
             //assert quote is not null 

@@ -42,6 +42,12 @@ QuotePage.prototype.untilLocated = function(element, time) {
     return webdriver.promise.fulfilled(true);
 };
 
+// waits until an element is visible
+QuotePage.prototype.untilVisible = function(element, time) {
+    this.driver.wait(webdriver.until.elementIsVisible(this.driver.findElement(element, time)));
+    return webdriver.promise.fulfilled(true);
+};
+
 // waits until an element has become stale
 QuotePage.prototype.untilStale = function(element, time) {
     this.driver.wait(webdriver.until.stalenessOf(this.driver.findElement(element, time)));
