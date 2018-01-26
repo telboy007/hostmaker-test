@@ -48,11 +48,11 @@ test.describe('Valid Postcode', function() {
 
         quotePage.getText(quotePage.quote_text).then(function(text) {
             //assert quote is not null 
-            assert.isNotEmpty(text, 'ASSERTION FAILURE: Quote is empty.');
+            assert.isNotEmpty(text, 'Quote is empty.');
 
             //assert quote is in expected range 
             var intQuote = text.replace(/[^0-9]/g,'');
-            assert.isTrue(1150 < intQuote && intQuote < 1350, 'ASSERTION FAILURE: Quote is not within expected range.');
+            assert.isTrue(1150 < intQuote && intQuote < 1250, 'Quote is not within expected range.');
         });
     });
     
